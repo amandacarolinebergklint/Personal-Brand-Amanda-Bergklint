@@ -1,0 +1,825 @@
+/* ==========================================================================
+   Amanda Bergklint – Portfolio Stylesheet
+   Tema: Vintage Editorial & Klassisk Elegans (Matchar CV-design)
+   ========================================================================== */
+
+/* --- Exakt signaturfont från Canva: Amsterdam --- */
+@font-face {
+  font-family: 'Amsterdam';
+  src: url('fonts/Amsterdam Personal Use.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+/* --- Root Färg- & Typografivariabler (Ljust Tema / CV-Tema) --- */
+:root {
+  /* CV-signaturfärg: Djup vinröd/burgundy */
+  --accent-burgundy: #8b2635;
+  --accent-burgundy-hover: #6d1b28;
+  --accent-burgundy-light: rgba(139, 38, 53, 0.12);
+  --accent-burgundy-border: rgba(139, 38, 53, 0.3);
+
+  /* Pappers- & Bakgrundstoner */
+  --bg-primary: #f6f2ea;
+  --bg-card: rgba(255, 253, 249, 0.9);
+  --bg-card-elevated: rgba(250, 246, 239, 0.95);
+  --bg-nav: rgba(246, 242, 234, 0.92);
+
+  /* Bläck & Texttoner */
+  --text-ink: #1f1e1c;
+  --text-body: #383531;
+  --text-muted: #6e6962;
+
+  /* Ramar & Linjer */
+  --rule-dark: #1f1e1c;
+  --rule-light: rgba(31, 30, 28, 0.14);
+  --rule-burgundy: rgba(139, 38, 53, 0.35);
+
+  /* Skuggor */
+  --shadow-subtle: 0 4px 18px rgba(35, 25, 20, 0.05);
+  --shadow-hover: 0 12px 32px rgba(139, 38, 53, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+
+  /* Typografi */
+  --font-signature: 'Amsterdam', 'Alex Brush', cursive;
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --radius-card: 10px;
+  --radius-full: 9999px;
+  --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Mörkt Tema (Subtilt natt-pergament) --- */
+body.dark-mode,
+[data-theme="dark"] body {
+  --accent-burgundy: #e28292;
+  --accent-burgundy-hover: #f0a3b0;
+  --accent-burgundy-light: rgba(226, 130, 146, 0.15);
+  --accent-burgundy-border: rgba(226, 130, 146, 0.35);
+
+  --bg-primary: #151413;
+  --bg-card: rgba(26, 24, 23, 0.92);
+  --bg-card-elevated: rgba(34, 31, 30, 0.95);
+  --bg-nav: rgba(21, 20, 19, 0.94);
+
+  --text-ink: #f5f2ea;
+  --text-body: #d4cec4;
+  --text-muted: #9c9488;
+
+  --rule-dark: #d4cec4;
+  --rule-light: rgba(245, 242, 234, 0.12);
+  --rule-burgundy: rgba(226, 130, 146, 0.35);
+
+  --shadow-subtle: 0 6px 20px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 16px rgba(226, 130, 146, 0.12);
+}
+
+/* --- Grundinställningar & Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  /* Bakgrundsbild från CV:t (vintage handskriven pergamentstruktur) */
+  background-image: url('bakgrund/_ (2).jpeg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text-body);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: color 0.3s ease;
+}
+
+/* Mörklägesövertoning för bakgrundsbilden */
+body.dark-mode {
+  background-image: linear-gradient(rgba(20, 18, 17, 0.93), rgba(20, 18, 17, 0.93)), url('bakgrund/_ (2).jpeg');
+}
+
+/* Tillgänglighetsfokus */
+:focus-visible {
+  outline: 2px solid var(--accent-burgundy);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Övre dubbellinje (Klassiskt CV-element) --- */
+.cv-top-rule {
+  width: 100%;
+  height: 7px;
+  border-top: 3px solid var(--rule-dark);
+  border-bottom: 1px solid var(--rule-dark);
+  background-color: transparent;
+}
+
+/* --- Sidhuvud (.sidhuvud) --- */
+.sidhuvud {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--bg-nav);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--rule-light);
+  padding: 0.85rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  transition: var(--transition);
+}
+
+.brand-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+
+.brand-title {
+  margin: 0;
+  line-height: 1;
+}
+
+.brand-title a {
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Bildrubriken från CV / img */
+.brand-headline-img {
+  height: clamp(48px, 5.5vw, 68px);
+  width: auto;
+  object-fit: contain;
+  /* Tar bort eventuell vit bakgrund från Canva och smälter in i pergamentet */
+  mix-blend-mode: multiply;
+  transition: var(--transition);
+}
+
+body.dark-mode .brand-headline-img {
+  /* I mörkt läge: inverteras subtilt till ljusrosa/vit så den syns perfekt */
+  mix-blend-mode: screen;
+  filter: invert(0.9) hue-rotate(180deg) brightness(1.25);
+}
+
+.sidhuvud .roll {
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--text-ink);
+  letter-spacing: 0.02em;
+  margin-top: -0.2rem;
+}
+
+/* Navigeringsmeny */
+.sidhuvud nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.sidhuvud nav a {
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-ink);
+  position: relative;
+  padding: 0.3rem 0;
+}
+
+.sidhuvud nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-burgundy);
+  transition: width 0.24s ease;
+}
+
+.sidhuvud nav a:hover {
+  color: var(--accent-burgundy);
+}
+
+.sidhuvud nav a:hover::after,
+.sidhuvud nav a.active::after {
+  width: 100%;
+}
+
+/* Temaknapp (#tema) */
+#tema {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  background-color: var(--bg-card);
+  color: var(--text-ink);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
+}
+
+#tema:hover {
+  background-color: var(--accent-burgundy-light);
+  border-color: var(--accent-burgundy);
+  color: var(--accent-burgundy);
+  transform: translateY(-1px);
+}
+
+/* --- Klassisk Kontaktlist under sidhuvud (CV-stil) --- */
+.cv-contact-bar {
+  width: 100%;
+  border-top: 1px solid var(--rule-dark);
+  border-bottom: 2px solid var(--rule-dark);
+  background-color: rgba(255, 253, 248, 0.65);
+  backdrop-filter: blur(4px);
+  padding: 0.5rem 1.5rem;
+  text-align: center;
+}
+
+.cv-contact-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  color: var(--text-ink);
+}
+
+.cv-contact-inner a {
+  color: var(--text-ink);
+}
+
+.cv-contact-inner a:hover {
+  color: var(--accent-burgundy);
+  text-decoration: underline;
+}
+
+.cv-contact-inner .sep {
+  color: var(--accent-burgundy);
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* --- Huvudinnehåll (main) --- */
+main {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 3.5rem 1.75rem 5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+/* --- Rubriker (h2 & h3 matchar CV:t) --- */
+main section > h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 3.8vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--accent-burgundy);
+  margin-bottom: 1.8rem;
+  position: relative;
+  display: inline-block;
+  line-height: 1.25;
+}
+
+main section > h2::after {
+  content: '';
+  display: block;
+  width: 55px;
+  height: 2.5px;
+  background-color: var(--accent-burgundy);
+  margin-top: 0.5rem;
+  border-radius: 1px;
+}
+
+/* --- Intro / Hero Sektion --- */
+.intro {
+  padding: 4rem 3rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--accent-burgundy-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.intro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--accent-burgundy);
+}
+
+.intro h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 3.6vw, 2.85rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--accent-burgundy);
+  max-width: 900px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.intro h2::after {
+  display: none;
+}
+
+.intro p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-ink);
+  max-width: 700px;
+}
+
+/* Knapp (.knapp i vinrött från CV) */
+.knapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.85rem 2.2rem;
+  background-color: var(--accent-burgundy);
+  color: #ffffff;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--accent-burgundy-hover);
+  box-shadow: 0 4px 14px rgba(139, 38, 53, 0.28);
+  transition: var(--transition);
+  margin-top: 0.5rem;
+}
+
+.knapp:hover {
+  background-color: var(--accent-burgundy-hover);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(139, 38, 53, 0.38);
+}
+
+/* --- Om mig Sektion --- */
+#om {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  grid-template-areas: 
+    "title title"
+    "image bio";
+  column-gap: 3.5rem;
+  row-gap: 1.5rem;
+  align-items: center;
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--rule-light);
+  border-radius: var(--radius-card);
+  padding: 3rem;
+  box-shadow: var(--shadow-subtle);
+}
+
+#om h2 {
+  grid-area: title;
+  margin-bottom: 0.5rem;
+}
+
+/* Profilbild med elegant inramning */
+#om img {
+  grid-area: image;
+  width: 100%;
+  max-width: 340px;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid var(--accent-burgundy);
+  padding: 5px;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-subtle);
+  transition: var(--transition);
+}
+
+#om img:hover {
+  transform: scale(1.015);
+  box-shadow: var(--shadow-hover);
+}
+
+#om p:first-of-type {
+  grid-area: bio;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 480px;
+  justify-self: center;
+  font-size: 1.05rem;
+  color: var(--text-ink);
+  margin-bottom: 1.25rem;
+  line-height: 1.65;
+  padding: 9rem 6rem;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  background: none;
+}
+
+#om p:first-of-type::before {
+  content: '';
+  position: absolute;
+  inset: -2rem -2.5rem;
+  z-index: -1;
+  background: url("img/red-frame-transparent.png") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+#om p:last-of-type {
+  font-size: 1.05rem;
+  color: var(--text-body);
+  line-height: 1.75;
+}
+
+/* --- Rutnät & Kort (.rutnat, .kort) --- */
+.rutnat {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.85rem;
+}
+
+.kort {
+  background-color: var(--bg-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--accent-burgundy-border);
+  border-radius: var(--radius-card);
+  padding: 2.2rem;
+  box-shadow: var(--shadow-subtle);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.kort:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-burgundy);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Utbildning-kort */
+#utbildning .kort::before,
+#tjanster .kort::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--accent-burgundy);
+}
+
+#utbildning .kort .period {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+#utbildning .kort h3,
+#tjanster .kort h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+  color: var(--accent-burgundy);
+  line-height: 1.3;
+}
+
+#utbildning .kort p,
+#tjanster .kort p {
+  font-size: 0.98rem;
+  color: var(--text-body);
+  line-height: 1.65;
+}
+
+/* Punktlista för utbildning (med stjärnor som i CV:t) */
+.utbildning-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.utbildning-lista li,
+.gymnasie-beskrivning {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.96rem;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+.utbildning-lista li::before,
+.gymnasie-beskrivning::before {
+  content: '☆';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-burgundy);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Diplom & Meriter (Projekt-kort) */
+#diplom-meriter .kort,
+#projekt .kort {
+  padding: 0;
+}
+
+#diplom-meriter .kort img,
+#projekt .kort img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: top center;
+  background-color: var(--bg-card-elevated);
+  border-bottom: 1px solid var(--rule-light);
+  transition: transform 0.4s ease;
+}
+
+#diplom-meriter .kort:hover img,
+#projekt .kort:hover img {
+  transform: scale(1.03);
+}
+
+#diplom-meriter .kort h3,
+#projekt .kort h3 {
+  font-family: var(--font-serif);
+  font-size: 1.32rem;
+  font-weight: 600;
+  margin: 1.5rem 1.6rem 0.5rem;
+  color: var(--accent-burgundy);
+  line-height: 1.3;
+}
+
+#diplom-meriter .kort p,
+#projekt .kort p {
+  font-size: 0.96rem;
+  color: var(--text-body);
+  margin: 0 1.6rem 0.5rem;
+  line-height: 1.6;
+}
+
+#diplom-meriter .kort .period,
+#projekt .kort .period {
+  display: block;
+  margin: auto 1.6rem 1.3rem;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* --- Kontakt Sektion --- */
+#kontakt {
+  background-color: var(--bg-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--accent-burgundy-border);
+  border-radius: var(--radius-card);
+  padding: 3.5rem 2.5rem;
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+}
+
+#kontakt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--accent-burgundy);
+}
+
+#kontakt h2 {
+  margin-bottom: 0.5rem;
+}
+
+#kontakt p {
+  font-size: 1.1rem;
+  color: var(--text-body);
+}
+
+#kontakt p:first-of-type {
+  font-size: 1.15rem;
+  max-width: 650px;
+  color: var(--text-ink);
+  margin-bottom: 0.5rem;
+}
+
+.kontakt-rader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.kontakt-rader p {
+  font-family: var(--font-serif);
+  font-size: 1.18rem;
+  color: var(--text-ink);
+}
+
+.kontakt-rader a {
+  color: var(--accent-burgundy);
+  font-weight: 600;
+}
+
+.kontakt-rader a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* --- Sidfot (footer) --- */
+footer {
+  border-top: 1px solid var(--rule-dark);
+  background-color: var(--bg-nav);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.footer-signature {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+}
+
+body.dark-mode .footer-signature {
+  mix-blend-mode: screen;
+  filter: invert(0.9) hue-rotate(180deg) brightness(1.25);
+}
+
+footer p {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* --- Responsiv Design --- */
+@media (max-width: 860px) {
+  .sidhuvud {
+    flex-wrap: wrap;
+    padding: 1rem 1.25rem;
+  }
+
+  .sidhuvud nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-top: 0.5rem;
+  }
+
+  .sidhuvud nav ul {
+    gap: 1.2rem;
+  }
+
+  #om {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "title"
+      "image"
+      "bio";
+    padding: 2rem 1.5rem;
+    row-gap: 1.5rem;
+  }
+
+  #om img {
+    max-width: 100%;
+    height: 320px;
+    margin: 0 auto;
+  }
+
+  .cv-contact-inner {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .cv-contact-inner .sep {
+    display: none;
+  }
+
+  .intro {
+    padding: 2.75rem 1.5rem;
+  }
+
+  main {
+    padding: 2rem 1.25rem 4rem;
+    gap: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-headline-img {
+    height: 44px;
+  }
+
+  .sidhuvud .roll {
+    font-size: 0.85rem;
+  }
+
+  .intro h2 {
+    font-size: 1.85rem;
+  }
+
+  .rutnat {
+    grid-template-columns: 1fr;
+  }
+
+  #om p:first-of-type {
+    max-width: 340px;
+    padding: 6rem 4rem;
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  #om p:first-of-type::before {
+    inset: -1.25rem;
+  }
+}

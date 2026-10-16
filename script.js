@@ -6,51 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initActiveNav();
-  initContactForm();
 });
-
-/** Skickar kontaktformuläret till sajtens serverlösa e-postfunktion. */
-function initContactForm() {
-  const form = document.getElementById('kontakt-form');
-  if (!form) return;
-
-  const submitButton = form.querySelector('button[type="submit"]');
-  const status = document.getElementById('kontakt-status');
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    if (!form.reportValidity()) return;
-
-    const data = Object.fromEntries(new FormData(form).entries());
-    status.textContent = '';
-    status.dataset.state = '';
-    submitButton.disabled = true;
-    submitButton.textContent = 'Skickar…';
-
-    fetch('https://personal-brand-amanda-bergklint.vercel.app/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(async (response) => {
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(result.error || 'send_failed');
-        form.reset();
-        status.textContent = 'Tack! Ditt meddelande har skickats.';
-        status.dataset.state = 'success';
-      })
-      .catch((error) => {
-        status.textContent = error.message === 'service_not_configured'
-          ? 'Formuläret kopplas just nu till e-posttjänsten. Försök igen lite senare.'
-          : 'Meddelandet kunde inte skickas just nu. Försök igen om en stund.';
-        status.dataset.state = 'error';
-      })
-      .finally(() => {
-        submitButton.disabled = false;
-        submitButton.textContent = 'Skicka meddelande';
-      });
-  });
-}
 
 /**
  * Hanterar mörkt och ljust läge med knappen #tema

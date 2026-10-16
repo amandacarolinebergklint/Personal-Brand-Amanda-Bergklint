@@ -145,24 +145,16 @@
         <section id="kontakt">
             <h2>Kontakt</h2>
             <p>Är du fortfarande intresserad och vill veta mer - Hör gärna av dig!</p>
-            <form class="kontakt-form" id="kontakt-form">
-                <div class="kontakt-form-falt">
-                    <label for="kontakt-namn">Namn</label>
-                    <input id="kontakt-namn" name="name" type="text" autocomplete="name" required>
-                </div>
-                <div class="kontakt-form-falt">
-                    <label for="kontakt-epost">E-post</label>
-                    <input id="kontakt-epost" name="email" type="email" autocomplete="email" required>
-                </div>
-                <div class="kontakt-form-falt kontakt-form-meddelande">
-                    <label for="kontakt-meddelande">Meddelande</label>
-                    <textarea id="kontakt-meddelande" name="message" rows="5" required></textarea>
-                </div>
-                <p class="kontakt-form-info">Ditt meddelande skickas direkt här från webbplatsen.</p>
-                <button class="knapp" type="submit">Skicka meddelande</button>
-                <p class="kontakt-form-status" id="kontakt-status" role="status" aria-live="polite"></p>
-                <input class="kontakt-form-fall" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-            </form>
+            <div class="hubspot-form-container" id="hubspot-kontaktform"></div>
+            <script charset="utf-8" type="text/javascript" src="https://js-eu1.hsforms.net/forms/embed/v2.js"></script>
+            <script>
+                hbspt.forms.create({
+                    region: "eu1",
+                    portalId: "149565728",
+                    formId: "2ed4978f-e962-4a49-ab0a-136507225332",
+                    target: "#hubspot-kontaktform"
+                });
+            </script>
         </section>
     </main>
 

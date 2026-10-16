@@ -765,6 +765,28 @@ main section > h2::after {
   color: var(--text-muted);
 }
 
+#kontakt .kontakt-form-status {
+  grid-column: 1 / -1;
+  font-size: 0.98rem;
+  color: var(--text-muted);
+}
+
+#kontakt .kontakt-form-status[data-state="success"] {
+  color: #356b45;
+}
+
+#kontakt .kontakt-form-status[data-state="error"] {
+  color: var(--accent-burgundy);
+}
+
+.kontakt-form-fall {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .kontakt-form .knapp {
   justify-self: start;
   border: 0;

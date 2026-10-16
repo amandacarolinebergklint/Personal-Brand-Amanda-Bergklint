@@ -15,8 +15,8 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=20261016-2">
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css?v=20261016-3">
+    <script defer src="script.js?v=20261016-1"></script>
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
@@ -145,6 +145,23 @@
         <section id="kontakt">
             <h2>Kontakt</h2>
             <p>Är du fortfarande intresserad och vill veta mer - Hör gärna av dig!</p>
+            <form class="kontakt-form" id="kontakt-form" action="mailto:amandacaroline.bergklint@gmail.com"
+                method="post" enctype="text/plain">
+                <div class="kontakt-form-falt">
+                    <label for="kontakt-namn">Namn</label>
+                    <input id="kontakt-namn" name="name" type="text" autocomplete="name" required>
+                </div>
+                <div class="kontakt-form-falt">
+                    <label for="kontakt-epost">E-post</label>
+                    <input id="kontakt-epost" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="kontakt-form-falt kontakt-form-meddelande">
+                    <label for="kontakt-meddelande">Meddelande</label>
+                    <textarea id="kontakt-meddelande" name="message" rows="5" required></textarea>
+                </div>
+                <p class="kontakt-form-info">När du skickar öppnas ditt e-postprogram med meddelandet färdigifyllt.</p>
+                <button class="knapp" type="submit">Skriv meddelande</button>
+            </form>
             <div class="kontakt-rader">
                 <p><strong>Mail:</strong> <a
                         href="mailto:amandacaroline.bergklint@gmail.com">amandacaroline.bergklint@gmail.com</a></p>

@@ -6,7 +6,30 @@
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initActiveNav();
+  initContactForm();
 });
+
+/**
+ * Öppnar ett färdigifyllt e-postmeddelande med kontaktformulärets innehåll
+ */
+function initContactForm() {
+  const form = document.getElementById('kontakt-form');
+  if (!form) return;
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const message = String(data.get('message') || '').trim();
+    const subject = `Meddelande från portfolio – ${name}`;
+    const body = `Namn: ${name}\nE-post: ${email}\n\nMeddelande:\n${message}`;
+    const mailto = `mailto:amandacaroline.bergklint@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
+  });
+}
 
 /**
  * Hanterar mörkt och ljust läge med knappen #tema

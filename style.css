@@ -86,6 +86,12 @@ body.dark-mode,
   padding: 0;
 }
 
+/* Dölj Google Tag Manager noscript iframe */
+noscript iframe {
+  display: none;
+  visibility: hidden;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 110px;
@@ -203,6 +209,10 @@ body.dark-mode .brand-headline-img {
 }
 
 /* Navigeringsmeny */
+.menyknapp {
+  display: none;
+}
+
 .sidhuvud nav ul {
   list-style: none;
   display: flex;
@@ -761,19 +771,104 @@ footer p {
 /* --- Responsiv Design --- */
 @media (max-width: 860px) {
   .sidhuvud {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand toggle"
+      "brand theme"
+      "nav nav";
+    align-items: center;
     padding: 1rem 1.25rem;
   }
 
+  .brand-group {
+    grid-area: brand;
+    min-width: 0;
+  }
+
+  .menyknapp {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--accent-burgundy-border);
+    border-radius: 50%;
+    color: var(--accent-burgundy);
+    cursor: pointer;
+    grid-area: toggle;
+    flex: 0 0 auto;
+  }
+
+  #tema {
+    grid-area: theme;
+    justify-self: end;
+    margin: 0;
+  }
+
+  .menyknapp span {
+    display: block;
+    width: 19px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .menyknapp[aria-expanded="true"] span:first-child {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menyknapp[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menyknapp[aria-expanded="true"] span:last-child {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .menyknapp:focus-visible {
+    outline: 2px solid var(--accent-burgundy);
+    outline-offset: 3px;
+  }
+
   .sidhuvud nav {
-    order: 3;
     width: 100%;
-    overflow-x: auto;
-    padding-top: 0.5rem;
+    grid-area: nav;
+    display: none;
+    padding: 0.75rem 0 0.25rem;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .sidhuvud nav.is-open {
+    display: block;
   }
 
   .sidhuvud nav ul {
-    gap: 1.2rem;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .sidhuvud nav li + li {
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .sidhuvud nav a {
+    display: block;
+    padding: 0.7rem 0.25rem;
+    font-size: 1.08rem;
+  }
+
+  .sidhuvud nav a::after {
+    display: none;
+  }
+
+  .sidhuvud nav a.active {
+    color: var(--accent-burgundy);
   }
 
   #om {

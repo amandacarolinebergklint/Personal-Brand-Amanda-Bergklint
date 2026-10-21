@@ -6,7 +6,34 @@
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initActiveNav();
+  initMobileNav();
 });
+
+/** Öppnar och stänger sektionsmenyn i mobilvyn. */
+function initMobileNav() {
+  const menuButton = document.querySelector('.menyknapp');
+  const nav = document.getElementById('huvudmeny');
+  if (!menuButton || !nav) return;
+
+  const closeMenu = () => {
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Öppna menyn');
+    nav.classList.remove('is-open');
+  };
+
+  menuButton.addEventListener('click', () => {
+    const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', String(!isOpen));
+    menuButton.setAttribute('aria-label', isOpen ? 'Öppna menyn' : 'Stäng menyn');
+    nav.classList.toggle('is-open', !isOpen);
+  });
+
+  nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+  window.matchMedia('(min-width: 861px)').addEventListener('change', closeMenu);
+}
 
 /**
  * Hanterar mörkt och ljust läge med knappen #tema
